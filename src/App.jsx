@@ -54,7 +54,7 @@ export default function LandingPage() {
         </p>
 
         <div className="mt-0 md:mt-0">
-          <img className="w-40 h-40 rounded-full object-cover" src={authorPic} alt="Author" />
+          <img className="w-40 h-40 rounded-full object-cover shadow-2xl" src={authorPic} alt="Author" />
         </div>
       </div>
       </section>
