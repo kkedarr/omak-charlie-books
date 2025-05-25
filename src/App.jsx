@@ -53,7 +53,7 @@ export default function LandingPage() {
           his works inspire curiosity and growth in readers of all ages.
         </p>
 
-        <div className="mt-0 md:mt-0">
+        <div className="mt-6 md:mt-0">
           <img className="w-40 h-40 rounded-full object-cover shadow-2xl" src={authorPic} alt="Author" />
         </div>
       </div>
