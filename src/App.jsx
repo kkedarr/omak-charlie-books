@@ -35,20 +35,35 @@ const books = [
 ];
 
 const faqs = [
-  {
+ {
     question: "Are the books suitable for kids?",
     answer:
-      "Yes! Most books are family-friendly. Adult-only books are clearly labeled.",
+      "Absolutely! Most of the books are thoughtfully written to be family-friendly and enjoyable for readers of all ages. If a book contains adult themes or content intended only for mature readers, it is clearly marked so you can make an informed choice.",
   },
   {
-    question: "Where can I buy them?",
+    question: "Where can I buy the books?",
     answer:
-      "They're available on Amazon and Gumroad with links provided.",
+      "You can conveniently purchase the books on Amazon and Gumroad. All direct purchase links are available on the website, making it easy to find your preferred format and complete your order securely.",
   },
   {
-    question: "Do you offer signed copies?",
+  question: "How can I get the book on Amazon?",
+  answer:
+    "Getting your copy on Amazon is simple! Both paperback and ebook versions are available. For the easiest experience, use the direct Amazon link provided on our website to go straight to the book’s page. The ordering process is user-friendly and secured by Amazon’s trusted payment system.",
+  },
+  {
+    question: "Are both paperback and ebook formats available?",
     answer:
-      "Yes! Contact us to request a signed copy of any paperback title.",
+      "Yes! You have the option to choose between paperback and ebook formats on Amazon. Additionally, the ebook version is available on Gumroad, which allows for instant digital download no matter where you are.",
+  },
+  {
+    question: "What about delivery and shipping?",
+    answer:
+      "Amazon manages all delivery and shipping logistics. They offer worldwide shipping to any country where Amazon operates. Shipping costs and delivery times depend on your location and the selected shipping method, with options often ranging from standard to expedited delivery.",
+  },
+  {
+    question: "Is the book available internationally?",
+    answer:
+      "Yes! The books are available internationally on Amazon in all countries where Amazon has a presence. For countries where Amazon’s reach is limited, the ebook versions can be purchased and downloaded instantly worldwide via Gumroad, ensuring readers everywhere can access the books.",
   },
 ];
 
@@ -61,33 +76,49 @@ export default function LandingPage() {
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
+
     if (!name.trim() || !email.trim()) {
-      setFeedback("Please enter your name and a valid email.");
+      setFeedback("Please enter your name and a valid email.⚠️");
       setTimeout(() => setFeedback(""), 4000);
       return;
     }
+
+    setFeedback("Submitting your subscription...⏳");
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => {
+      controller.abort(); // Cancel the request
+      setFeedback("Server is waking up... please wait a few seconds and try again.⏳");
+    }, 15000); // 15-second timeout
 
     try {
       const response = await fetch("https://omak-charlie-books-backend.onrender.com/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email }),
+        signal: controller.signal,
       });
 
+      clearTimeout(timeout); // Clear timeout if response is received in time
+
       if (response.ok) {
-        setFeedback(`Thanks for subscribing, ${name}!`);
+        setFeedback(`Thanks for subscribing, ${name}!✅`);
         setName("");
         setEmail("");
       } else {
         const resJson = await response.json();
-        setFeedback(resJson.message || "Subscription failed. Please try again.");
+        setFeedback(resJson.message || "Subscription failed. Please try again.❌");
       }
     } catch (error) {
-      setFeedback("An error occurred. Please try again later.");
+      if (error.name !== "AbortError") {
+        setFeedback("An error occurred. Please try again later.🚨");
+      }
+      // Else: Already handled in timeout
     }
 
-    setTimeout(() => setFeedback(""), 4000);
+    setTimeout(() => setFeedback(""), 5000);
   };
+
 
 
 
@@ -136,12 +167,12 @@ export default function LandingPage() {
           {books.map((book, index) => (
             <div
               key={index}
-              className="bg-[#1A4862] bg-opacity-80 rounded-2xl shadow-lg w-80 p-4 text-center transform transition duration-300 ease-in-out hover:scale-105"
+              className="bg-[#1A4862] bg-opacity-80 rounded-md shadow-lg w-80 p-4 text-center transform transition duration-300 ease-in-out hover:scale-105"
             >
               <img
                 src={book.image}
                 alt={book.title}
-                className="w-full h-[420px] object-cover rounded-md mb-4"
+                className="w-full h-[420px] object-cover rounded-sm mb-4"
               />
               <h3 className="text-xl font-bold text-[#D7DFA3] mb-2">{book.title}</h3>
               <p className="text-sm text-justify text-[#D7DFA3] mb-2">{book.description}</p>
@@ -170,7 +201,7 @@ export default function LandingPage() {
       </section>
 
       {/* Subscription Section */}
-      <section className="bg-[#1A4862] py-12 px-4 text-center">
+      <section className="bg-[#1A4862] py-12 px-4 text-center mt-5">
         <h2 className="text-2xl md:text-3xl font-semibold text-[#D7DFA3] mb-2">Stay Updated</h2>
         <p className="text-[#D7DFA3] mb-6 max-w-xl mx-auto">
           Subscribe to our newsletter to receive updates on new book releases, events, and exclusive content from Omak Charlie Omar.
@@ -210,11 +241,13 @@ export default function LandingPage() {
           <h2 className="text-2xl font-bold mb-4">Reader Reviews</h2>
           <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
             {[
-              `"Omak's writing is insightful and fresh!" — Amanda L.`,
-              `"The Ultimate Foreplay Handbook changed my relationship." — David R.`,
-              `"The ocean book is a beautiful and engaging read!" — Zoe K.`,
-              `"My son loves the dinosaur facts!" — Chris B.`,
-              `"Educational and entertaining – highly recommended." — Janet M.`
+              `“Honestly, I didn't think a book on foreplay would feel this empowering. It's not vulgar, it's not awkward — it's just honest, well-written, and incredibly helpful. Every couple should read this at least once.” — Maggie J.`,
+              `“What really blew my mind in Dinosaurs and Prehistoric Evolution was the detailed illustration and explanation of the Chicxulub asteroid. I’ve read articles before, but this book actually helped me visualize the scale of destruction and understand how it led to the dinosaurs’ extinction. My kids kept asking questions for days. It’s educational without being overwhelming — a brilliant way to bring ancient history to life.” — Ben S.`,
+              `“I was genuinely moved by The Magnificent Giants of the Ocean, especially the part about the killer whale mother who carried her dead calf for 17 days across hundreds of miles. I’d heard the story before, but seeing it framed in the context of orca intelligence and emotional depth made it even more powerful. This book does more than educate — it builds empathy for marine life.” — Chris U.`,
+              `"I bought The Ultimate Foreplay Handbook with some skepticism, but I was pleasantly surprised. It's informative without being clinical, and it actually helped my partner and I communicate better in the bedroom. Highly recommend for couples wanting to rekindle intimacy.” — Rita`,
+              `“My teenage son is fascinated with dinosaurs, so I got him Dinosaurs and Prehistoric Evolution. It turned out to be a great resource for both of us! The illustrations were engaging, and it sparked hours of discussion. A wonderful mix of education and entertainment.” — Mark T.`,
+              `“As a marine biology enthusiast, The Magnificent Giants of the Ocean exceeded my expectations. The writing is vivid, and I could tell a lot of research went into this book. It’s perfect for anyone who wants to learn about ocean life without it feeling like a textbook.” — Marisa E.`,
+              `“Omak’s storytelling voice is what really makes his books stand out. Whether he's writing about romance or natural history, there’s a unique warmth and clarity. I subscribed to his newsletter just so I don’t miss the next release!” — Charles N.`,
             ].map((review, idx) => (
               <div
                 key={idx}
@@ -228,7 +261,7 @@ export default function LandingPage() {
 
         <div>
           <h2 className="text-2xl font-bold mb-4">FAQs</h2>
-          <div className="space-y-4">
+          <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
             {faqs.map((faq, index) => (
               <div
                 key={index}
