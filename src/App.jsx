@@ -59,17 +59,38 @@ export default function LandingPage() {
   const [showTopBtn, setShowTopBtn] = useState(false);
   const [openFAQIndex, setOpenFAQIndex] = useState(null);
 
-  const handleSubscribe = (e) => {
+  const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (name.trim() && email.trim()) {
-      setFeedback(`Thanks for subscribing, ${name}!`);
-      setName("");
-      setEmail("");
-    } else {
+    if (!name.trim() || !email.trim()) {
       setFeedback("Please enter your name and a valid email.");
+      setTimeout(() => setFeedback(""), 4000);
+      return;
     }
+
+    try {
+      const response = await fetch("https://omak-charlie-books-backend.onrender.com/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email }),
+      });
+
+      if (response.ok) {
+        setFeedback(`Thanks for subscribing, ${name}!`);
+        setName("");
+        setEmail("");
+      } else {
+        const resJson = await response.json();
+        setFeedback(resJson.message || "Subscription failed. Please try again.");
+      }
+    } catch (error) {
+      setFeedback("An error occurred. Please try again later.");
+    }
+
     setTimeout(() => setFeedback(""), 4000);
   };
+
+
+
 
   useEffect(() => {
     const handleScroll = () => {
