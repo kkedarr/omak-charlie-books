@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #1A4862;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-track {
+  background: #D7DFA3;
+}
