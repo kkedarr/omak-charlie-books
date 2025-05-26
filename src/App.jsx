@@ -88,7 +88,7 @@ export default function LandingPage() {
     const controller = new AbortController();
     const timeout = setTimeout(() => {
       controller.abort(); // Cancel the request
-      setFeedback("Server is waking up... please wait a few seconds and try again.⏳");
+      setFeedback("Server is waking up... please reload this page 30 seconds and try again.⏳");
     }, 15000); // 15-second timeout
 
     try {
