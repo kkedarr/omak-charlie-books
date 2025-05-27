@@ -88,7 +88,7 @@ export default function LandingPage() {
     const controller = new AbortController();
     const timeout = setTimeout(() => {
       controller.abort(); // Cancel the request
-      setFeedback("Server is waking up... please reload this page 30 seconds and try again.⏳");
+      setFeedback("Server is waking up 😴... please reload this page in 30 seconds and try again.");
     }, 15000); // 15-second timeout
 
     try {
@@ -102,7 +102,7 @@ export default function LandingPage() {
       clearTimeout(timeout); // Clear timeout if response is received in time
 
       if (response.ok) {
-        setFeedback(`Thanks for subscribing, ${name}!✅`);
+        setFeedback(`Thanks for subscribing✅, ${name}!`);
         setName("");
         setEmail("");
       } else {
