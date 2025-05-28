@@ -159,19 +159,19 @@ export default function LandingPage() {
         </p>
         <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto text-left">
           <div className="bg-[#E8EFCB] p-6 rounded-xl shadow-md hover:shadow-lg transition">
-            <h3 className="font-semibold text-lg mb-2 text-[#1A4862]">🔞 Adults only: For Relationships & Intimacy</h3>
+            <h3 className="font-semibold text-center text-lg mb-2 text-[#1A4862]">🔞 Adults only: For Relationships & Intimacy</h3>
             <p className="text-gray-700">
               Start with <strong>The Ultimate Foreplay Handbook</strong>  — a practical and bold guide to deepening intimacy. Note: Recommended for readers above the age of consent.
             </p>
           </div>
           <div className="bg-[#E8EFCB] p-6 rounded-xl shadow-md hover:shadow-lg transition">
-            <h3 className="font-semibold text-lg mb-2 text-[#1A4862]">🦕 For Curious Minds: Dinosaurs & Prehistoric Evolution</h3>
+            <h3 className="font-semibold text-center text-lg mb-2 text-[#1A4862]">🦕 For Curious Minds: Dinosaurs & Prehistoric Evolution</h3>
             <p className="text-gray-700">
               Journey back in time with <strong>Dinosaurs and Prehistoric Evolution</strong>  — uncover fascinating stories of Earth’s ancient giants and their evolutionary legacy.
             </p>
           </div>
           <div className="bg-[#E8EFCB] p-6 rounded-xl shadow-md hover:shadow-lg transition">
-            <h3 className="font-semibold text-lg mb-2 text-[#1A4862]">🌊 For Ocean Lovers: Majestic Marine Giants</h3>
+            <h3 className="font-semibold text-center text-lg mb-2 text-[#1A4862]">🌊 For Ocean Lovers: Majestic Marine Giants</h3>
             <p className="text-gray-700">
               Explore the awe-inspiring world of <strong>The Magnificent Giants of the Ocean</strong>  — celebrating the beauty and power of Earth’s largest sea creatures.
             </p>
