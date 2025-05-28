@@ -344,7 +344,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="bg-[#1A4862] text-center text-[#D7DFA3] py-6">
-        <p>Contact: <a href="mailto:omakcharlie@gmail.com" className="underline">omakcharlie@gmail.com</a></p>
+        <p>Contact author: <a href="mailto:omakcharlie@gmail.com" className="underline">omakcharlie@gmail.com</a></p>
         <p>&copy; {new Date().getFullYear()} Omak Charlie Omar. All rights reserved.</p>
       </footer>
 
