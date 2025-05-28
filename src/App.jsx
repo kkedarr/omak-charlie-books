@@ -3,6 +3,13 @@ import foreplayBook from "./assets/foreplaybook.jpg";
 import dinosaurBook from "./assets/dinosaurbook.jpg";
 import oceanBook from "./assets/oceanbook.jpg";
 import authorPic from "./assets/authorpic.jpg";
+import Slide1 from './assets/foreplaybookcarousel1.jpeg';
+import Slide2 from './assets/foreplaybookcarousel2.jpeg';
+import Slide3 from './assets/foreplaybookcarousel3.jpeg';
+import Slide4 from './assets/foreplaybookcarousel4.jpeg';
+import Slide5 from './assets/foreplaybookcarousel5.jpeg';
+import Slide6 from './assets/foreplaybookcarousel6.jpeg';
+
 
 const books = [
   {
@@ -142,27 +149,73 @@ export default function LandingPage() {
       {/* Sticky Header */}
       <header className="bg-[#1A4862] text-[#D7DFA3] text-center py-10 sticky top-0 z-50">
         <h1 className="text-4xl font-bold">Omak Charlie Omar</h1>
-        <p className="mt-2 text-lg">omakcharlie@gmail.com</p>
+        <p className="text-lg mt-2 italic">Author & Storyteller</p>
       </header>
+      
+      <section className="bg-[#D7DFA3] py-10 px-6 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-[#1A4862]">New Here? Start With These</h2>
+        <p className="mb-8 text-gray-700 max-w-2xl mx-auto">
+          Whether you're here for intimacy advice, nature insights, or mind-expanding reads, here's where to start:
+        </p>
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto text-left">
+          <div className="bg-[#E8EFCB] p-6 rounded-xl shadow-md hover:shadow-lg transition">
+            <h3 className="font-semibold text-lg mb-2 text-[#1A4862]">🔞 Adults only: For Relationships & Intimacy</h3>
+            <p className="text-gray-700">
+              Start with <strong>The Ultimate Foreplay Handbook</strong>  — a practical and bold guide to deepening intimacy. Note: Recommended for readers above the age of consent.
+            </p>
+          </div>
+          <div className="bg-[#E8EFCB] p-6 rounded-xl shadow-md hover:shadow-lg transition">
+            <h3 className="font-semibold text-lg mb-2 text-[#1A4862]">🦕 For Curious Minds: Dinosaurs & Prehistoric Evolution</h3>
+            <p className="text-gray-700">
+              Journey back in time with <strong>Dinosaurs and Prehistoric Evolution</strong>  — uncover fascinating stories of Earth’s ancient giants and their evolutionary legacy.
+            </p>
+          </div>
+          <div className="bg-[#E8EFCB] p-6 rounded-xl shadow-md hover:shadow-lg transition">
+            <h3 className="font-semibold text-lg mb-2 text-[#1A4862]">🌊 For Ocean Lovers: Majestic Marine Giants</h3>
+            <p className="text-gray-700">
+              Explore the awe-inspiring world of <strong>The Magnificent Giants of the Ocean</strong>  — celebrating the beauty and power of Earth’s largest sea creatures.
+            </p>
+          </div>
+        </div>
+      </section>
+
 
       {/* Author Section */}
-      <section className="text-center py-5 px-4">
-        <h2 className="text-2xl font-bold mb-1">About the Author</h2>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-x-8">
-          <p className="max-w-2xl text-justify">
-            Omak Charlie Omar is a passionate writer dedicated to enlightening and educating readers across diverse subjects,
-            from intimacy and relationships to natural history and ocean life. Through meticulously researched content and a powerful narrative style,
-            his works inspire curiosity and growth in readers of all ages.
-          </p>
-          <div className="mt-6 md:mt-0">
-            <img className="w-40 h-40 rounded-full object-cover shadow-2xl" src={authorPic} alt="Author" />
+      <section className="text-center py-10 px-4 bg-[#1A4862]">
+        <h2 className="text-[#D7DFA3] text-3xl font-bold mb-6">About the Author</h2>
+        <div className="text-[#D7DFA3] flex flex-col md:flex-row items-center justify-center gap-10">
+          
+          {/* Author Bio & Image */}
+          <div className="max-w-xl text-justify space-y-4">
+            <p>
+              Omak Charlie Omar is a passionate writer dedicated to enlightening and educating readers across diverse subjects,
+              from intimacy and relationships to natural history and ocean life. Through meticulously researched content and a powerful narrative style,
+              his works inspire curiosity and growth in readers of all ages.
+            </p>
+            <img className="w-40 h-40 rounded-full object-cover shadow-2xl mx-auto md:mx-0" src={authorPic} alt="Author" />
+          </div>
+
+          {/* Most Popular Book Carousel */}
+          <div className="bg-[#D7DFA3]/5 p-2 w-full md:w-[500px] h-80 overflow-hidden rounded-lg shadow-lg relative">
+            <h2 className="text-[#D7DFA3] text-2xl font-bold p-3">Most Popular Book</h2>
+            <div className="carousel-track flex w-[200%] h-full hover:[animation-play-state:paused]">
+              {/* First set of slides */}
+              <img src={Slide1} alt="Slide 1" className="h-full max-w-[75%] object-contain mx-4" />
+              <img src={Slide2} alt="Slide 2" className="h-full max-w-[75%] object-contain mx-4" />
+              <img src={Slide3} alt="Slide 3" className="h-full max-w-[75%] object-contain mx-4" />
+
+              {/* Duplicate set of slides for smooth loop */}
+              <img src={Slide1} alt="Slide 1" className="h-full max-w-[75%] object-contain mx-4" />
+              <img src={Slide2} alt="Slide 2" className="h-full max-w-[75%] object-contain mx-4" />
+              <img src={Slide3} alt="Slide 3" className="h-full max-w-[75%] object-contain mx-4" />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Books Section */}
       <section className="py-5 px-4">
-        <h2 className="text-2xl font-semibold text-center mb-5">Books</h2>
+        <h2 className="text-2xl md:text-3xl font-semibold text-center mb-5">Books</h2>
         <div className="flex flex-wrap justify-center gap-6">
           {books.map((book, index) => (
             <div
@@ -291,6 +344,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="bg-[#1A4862] text-center text-[#D7DFA3] py-6">
+        <p>Contact: <a href="mailto:omakcharlie@gmail.com" className="underline">omakcharlie@gmail.com</a></p>
         <p>&copy; {new Date().getFullYear()} Omak Charlie Omar. All rights reserved.</p>
       </footer>
 
