@@ -19,5 +19,5 @@
 }
 
 .carousel-track {
-  animation: scroll-x 40s linear infinite;
+  animation: scroll-x 10s linear infinite;
 }

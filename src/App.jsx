@@ -147,9 +147,9 @@ export default function LandingPage() {
   return (
     <div className="bg-[#D7DFA3] text-[#1A4862] min-h-screen relative">
       {/* Sticky Header */}
-      <header className="bg-[#1A4862] text-[#D7DFA3] text-center py-10 sticky top-0 z-50">
+      <header className="bg-[#1A4862] h-[110px] text-[#D7DFA3] text-center py-5 sticky top-0 z-50">
         <h1 className="text-4xl font-bold">Omak Charlie Omar</h1>
-        <p className="text-lg mt-2 italic">Author & Storyteller</p>
+        <p className="text-lg mt-1 italic">Author & Storyteller</p>
       </header>
       
       <section className="bg-[#D7DFA3] py-10 px-6 text-center">
@@ -159,19 +159,19 @@ export default function LandingPage() {
         </p>
         <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto text-left">
           <div className="bg-[#E8EFCB] p-6 rounded-xl shadow-md hover:shadow-lg transition">
-            <h3 className="font-semibold text-center text-lg mb-2 text-[#1A4862]">🔞 Adults only: For Relationships & Intimacy</h3>
+            <h3 className="font-semibold text-center text-lg mb-2 text-[#1A4862]">Adults only: For Relationships & Intimacy 🔞</h3>
             <p className="text-gray-700">
               Start with <strong>The Ultimate Foreplay Handbook</strong>  — a practical and bold guide to deepening intimacy. Note: Recommended for readers above the age of consent.
             </p>
           </div>
           <div className="bg-[#E8EFCB] p-6 rounded-xl shadow-md hover:shadow-lg transition">
-            <h3 className="font-semibold text-center text-lg mb-2 text-[#1A4862]">🦕 For Curious Minds: Dinosaurs & Prehistoric Evolution</h3>
+            <h3 className="font-semibold text-center text-lg mb-2 text-[#1A4862]">For Curious Minds: Dinosaurs & Prehistoric Evolution</h3>
             <p className="text-gray-700">
               Journey back in time with <strong>Dinosaurs and Prehistoric Evolution</strong>  — uncover fascinating stories of Earth’s ancient giants and their evolutionary legacy.
             </p>
           </div>
           <div className="bg-[#E8EFCB] p-6 rounded-xl shadow-md hover:shadow-lg transition">
-            <h3 className="font-semibold text-center text-lg mb-2 text-[#1A4862]">🌊 For Ocean Lovers: Majestic Marine Giants</h3>
+            <h3 className="font-semibold text-center text-lg mb-2 text-[#1A4862]">For Ocean Lovers: Majestic Marine Giants</h3>
             <p className="text-gray-700">
               Explore the awe-inspiring world of <strong>The Magnificent Giants of the Ocean</strong>  — celebrating the beauty and power of Earth’s largest sea creatures.
             </p>
@@ -181,7 +181,7 @@ export default function LandingPage() {
 
 
       {/* Author Section */}
-      <section className="text-center py-10 px-4 bg-[#1A4862]">
+      <section className="text-center py-5 px-5 bg-[#1A4862]">
         <h2 className="text-[#D7DFA3] text-3xl font-bold mb-6">About the Author</h2>
         <div className="text-[#D7DFA3] flex flex-col md:flex-row items-center justify-center gap-10">
           
@@ -237,7 +237,7 @@ export default function LandingPage() {
                   rel="noopener noreferrer"
                   className="bg-[#D7DFA3] text-[#1A4862] px-4 py-2 rounded-lg text-sm hover:bg-[#FF9900] hover:text-black"
                 >
-                  Amazon
+                  Buy on Amazon
                 </a>
                 <a
                   href={book.gumroadLink}
@@ -245,7 +245,7 @@ export default function LandingPage() {
                   rel="noopener noreferrer"
                   className="bg-[#D7DFA3] text-[#1A4862] px-4 py-2 rounded-lg text-sm hover:bg-[#FF90E8] hover:text-black"
                 >
-                  Gumroad
+                  Buy on Gumroad
                 </a>
               </div>
             </div>
