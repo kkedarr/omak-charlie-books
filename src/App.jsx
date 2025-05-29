@@ -235,19 +235,24 @@ export default function LandingPage() {
                   href={book.amazonLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#D7DFA3] text-[#1A4862] px-4 py-2 rounded-lg text-sm hover:bg-[#FF9900] hover:text-black"
+                  className="group relative bg-[#D7DFA3] text-[#1A4862] px-2 py-2 rounded-sm font-semibold text-sm transition-colors duration-300 hover:bg-[#FF9900] hover:text-black"
                 >
-                  Buy on Amazon
+                  <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-1">
+                    Buy on Amazon
+                  </span>
                 </a>
                 <a
                   href={book.gumroadLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#D7DFA3] text-[#1A4862] px-4 py-2 rounded-lg text-sm hover:bg-[#FF90E8] hover:text-black"
+                  className="group relative bg-[#D7DFA3] text-[#1A4862] px-2 py-2 rounded-sm font-semibold text-sm transition-colors duration-300 hover:bg-[#FF90E8] hover:text-black"
                 >
-                  Buy on Gumroad
+                  <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-1">
+                    Buy on Gumroad
+                  </span>
                 </a>
               </div>
+
             </div>
           ))}
         </div>
@@ -279,10 +284,13 @@ export default function LandingPage() {
           />
           <button
             type="submit"
-            className="bg-[#D7DFA9] text-[#1A4862] px-6 py-2 hover:bg-[#D7DFD7] transition"
+            className="group relative bg-[#D7DFA9] text-[#1A4862] px-6 py-2 font-semibold rounded-sm transition-colors duration-300 hover:bg-[#D7DFD7]"
           >
-            Subscribe
+            <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2">
+              Subscribe
+            </span>
           </button>
+
         </form>
         {feedback && <p className="text-sm text-[#D7DFA3] mt-3">{feedback}</p>}
       </section>
@@ -355,7 +363,7 @@ export default function LandingPage() {
           className="fixed bottom-6 right-6 bg-[#FF9900] text-white rounded-full p-3 shadow-lg hover:bg-[#e68a00] transition"
           aria-label="Scroll to top"
         >
-          ↑
+         ↑
         </button>
       )}
     </div>
