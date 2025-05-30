@@ -6,11 +6,13 @@ export default {
   ],
   theme: {
     extend: {
+      scrollBehavior: ['responsive'],
       fontFamily: {
         sans: ['Montserrat', 'sans-serif'],
       },
     },
   },
+  variants: {},
   plugins: [],
 }
 

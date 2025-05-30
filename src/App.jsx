@@ -132,24 +132,45 @@ export default function LandingPage() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowTopBtn(window.scrollY > 300);
+      // Only update state if there's a change to avoid unnecessary re-renders
+      setShowTopBtn((prev) => {
+        const shouldShow = window.scrollY > 300;
+        return prev !== shouldShow ? shouldShow : prev;
+      });
     };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    // Clean up on unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const toggleFAQ = (index) => {
     setOpenFAQIndex(openFAQIndex === index ? null : index);
   };
 
+
   return (
     <div className="bg-[#D7DFA3] text-[#1A4862] min-h-screen relative">
       {/* Sticky Header */}
-      <header className="bg-[#1A4862] h-[110px] text-[#D7DFA3] text-center py-5 sticky top-0 z-50">
-        <h1 className="text-4xl font-bold">Omak Charlie Omar</h1>
-        <p className="text-lg mt-1 italic">Author & Storyteller</p>
+      <header className="bg-[#1A4862] text-[#D7DFA3] sticky top-0 z-50">
+        <div className="text-center py-4">
+          <h1 className="text-4xl font-bold">Omak Charlie Omar</h1>
+          <p className="text-lg mt-1 italic">Author & Storyteller</p>
+        </div>
+        <nav className="flex justify-center gap-6 py-3">
+          <a href="#books" className="hover:underline">Books</a>
+          <a href="#about" className="hover:underline">About</a>
+          <a href="#faq" className="hover:underline">FAQ</a>
+          <a href="#subscribe" className="hover:underline">Subscribe</a>
+        </nav>
       </header>
       
       <section className="bg-[#D7DFA3] py-10 px-6 text-center">
@@ -181,7 +202,7 @@ export default function LandingPage() {
 
 
       {/* Author Section */}
-      <section className="text-center py-5 px-5 bg-[#1A4862]">
+      <section id="about" className="scroll-mt-[130px] text-center py-5 px-5 bg-[#1A4862]">
         <h2 className="text-[#D7DFA3] text-3xl font-bold mb-6">About the Author</h2>
         <div className="text-[#D7DFA3] flex flex-col md:flex-row items-center justify-center gap-10">
           
@@ -192,44 +213,51 @@ export default function LandingPage() {
               from intimacy and relationships to natural history and ocean life. Through meticulously researched content and a powerful narrative style,
               his works inspire curiosity and growth in readers of all ages.
             </p>
-            <img className="w-40 h-40 rounded-full object-cover shadow-2xl mx-auto md:mx-0" src={authorPic} alt="Author" />
+            <img
+              className="w-40 h-40 rounded-full object-cover shadow-2xl mx-auto md:mx-0"
+              src={authorPic}
+              alt="Author"
+            />
           </div>
 
           {/* Most Popular Book Carousel */}
           <div className="bg-[#D7DFA3]/5 p-2 w-full md:w-[500px] h-80 overflow-hidden rounded-lg shadow-lg relative">
             <h2 className="text-[#D7DFA3] text-2xl font-bold p-3">Most Popular Book</h2>
-            <div className="carousel-track flex w-[200%] h-full hover:[animation-play-state:paused]">
-              {/* First set of slides */}
-              <img src={Slide1} alt="Slide 1" className="h-full max-w-[75%] object-contain mx-4" />
-              <img src={Slide2} alt="Slide 2" className="h-full max-w-[75%] object-contain mx-4" />
-              <img src={Slide3} alt="Slide 3" className="h-full max-w-[75%] object-contain mx-4" />
+            <div className="carousel-track flex w-[200%] h-full animate-scroll-x hover:[animation-play-state:paused]">
+              {/* First Set of Slides */}
+              <img src={Slide1} alt="Slide 1" className="h-full w-auto object-contain mx-4 flex-shrink-0" />
+              <img src={Slide2} alt="Slide 2" className="h-full w-auto object-contain mx-4 flex-shrink-0" />
+              <img src={Slide3} alt="Slide 3" className="h-full w-auto object-contain mx-4 flex-shrink-0" />
 
-              {/* Duplicate set of slides for smooth loop */}
-              <img src={Slide1} alt="Slide 1" className="h-full max-w-[75%] object-contain mx-4" />
-              <img src={Slide2} alt="Slide 2" className="h-full max-w-[75%] object-contain mx-4" />
-              <img src={Slide3} alt="Slide 3" className="h-full max-w-[75%] object-contain mx-4" />
+              {/* Duplicate Slides for Looping */}
+              <img src={Slide1} alt="Slide 1 duplicate" className="h-full w-auto object-contain mx-4 flex-shrink-0" />
+              <img src={Slide2} alt="Slide 2 duplicate" className="h-full w-auto object-contain mx-4 flex-shrink-0" />
+              <img src={Slide3} alt="Slide 3 duplicate" className="h-full w-auto object-contain mx-4 flex-shrink-0" />
             </div>
           </div>
         </div>
       </section>
 
+
       {/* Books Section */}
-      <section className="py-5 px-4">
+      <section id="books" className="scroll-mt-[130px] py-5 px-4">
         <h2 className="text-2xl md:text-3xl font-semibold text-center mb-5">Books</h2>
         <div className="flex flex-wrap justify-center gap-6">
-          {books.map((book, index) => (
+          {books.map((book) => (
             <div
-              key={index}
+              key={book.title} // Use a stable key like `book.id` or `book.title`
               className="bg-[#1A4862] bg-opacity-80 rounded-md shadow-lg w-80 p-4 text-center transform transition duration-300 ease-in-out hover:scale-105"
             >
               <img
                 src={book.image}
                 alt={book.title}
+                loading="lazy" // ✅ Performance boost
                 className="w-full h-[420px] object-cover rounded-sm mb-4"
               />
               <h3 className="text-xl font-bold text-[#D7DFA3] mb-2">{book.title}</h3>
               <p className="text-sm text-justify text-[#D7DFA3] mb-2">{book.description}</p>
               <p className="text-xs italic text-[#D7DFA3]">Genre: {book.genre}</p>
+
               <div className="flex justify-center gap-4 mt-4">
                 <a
                   href={book.amazonLink}
@@ -252,14 +280,14 @@ export default function LandingPage() {
                   </span>
                 </a>
               </div>
-
             </div>
           ))}
         </div>
       </section>
 
+
       {/* Subscription Section */}
-      <section className="bg-[#1A4862] py-12 px-4 text-center mt-5">
+      <section id="subscribe" className="scroll-mt-[130px] bg-[#1A4862] py-12 px-4 text-center mt-5">
         <h2 className="text-2xl md:text-3xl font-semibold text-[#D7DFA3] mb-2">Stay Updated</h2>
         <p className="text-[#D7DFA3] mb-6 max-w-xl mx-auto">
           Subscribe to our newsletter to receive updates on new book releases, events, and exclusive content from Omak Charlie Omar.
@@ -296,58 +324,70 @@ export default function LandingPage() {
       </section>
 
       {/* Reviews and FAQs */}
-      <section className="bg-[#D7DFA3] py-10 px-6">
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-        <div>
-          <h2 className="text-2xl font-bold mb-4">Reader Reviews</h2>
-          <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
-            {[
-              `“Honestly, I didn't think a book on foreplay would feel this empowering. It's not vulgar, it's not awkward — it's just honest, well-written, and incredibly helpful. Every couple should read this at least once.” — Maggie J.`,
-              `“What really blew my mind in Dinosaurs and Prehistoric Evolution was the detailed illustration and explanation of the Chicxulub asteroid. I’ve read articles before, but this book actually helped me visualize the scale of destruction and understand how it led to the dinosaurs’ extinction. My kids kept asking questions for days. It’s educational without being overwhelming — a brilliant way to bring ancient history to life.” — Ben S.`,
-              `“I was genuinely moved by The Magnificent Giants of the Ocean, especially the part about the killer whale mother who carried her dead calf for 17 days across hundreds of miles. I’d heard the story before, but seeing it framed in the context of orca intelligence and emotional depth made it even more powerful. This book does more than educate — it builds empathy for marine life.” — Chris U.`,
-              `"I bought The Ultimate Foreplay Handbook with some skepticism, but I was pleasantly surprised. It's informative without being clinical, and it actually helped my partner and I communicate better in the bedroom. Highly recommend for couples wanting to rekindle intimacy.” — Rita`,
-              `“My teenage son is fascinated with dinosaurs, so I got him Dinosaurs and Prehistoric Evolution. It turned out to be a great resource for both of us! The illustrations were engaging, and it sparked hours of discussion. A wonderful mix of education and entertainment.” — Mark T.`,
-              `“As a marine biology enthusiast, The Magnificent Giants of the Ocean exceeded my expectations. The writing is vivid, and I could tell a lot of research went into this book. It’s perfect for anyone who wants to learn about ocean life without it feeling like a textbook.” — Marisa E.`,
-              `“Omak’s storytelling voice is what really makes his books stand out. Whether he's writing about romance or natural history, there’s a unique warmth and clarity. I subscribed to his newsletter just so I don’t miss the next release!” — Charles N.`,
-            ].map((review, idx) => (
-              <div
-                key={idx}
-                className="bg-white shadow-md rounded-md p-4 hover:bg-[#D7DFD7] transition"
-              >
-                <p className="text-gray-800 italic">{review}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h2 className="text-2xl font-bold mb-4">FAQs</h2>
-          <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="bg-white shadow-md rounded-md p-4 hover:bg-[#D7DFD7] transition"
-              >
-                <button
-                  onClick={() => toggleFAQ(index)}
-                  className="w-full text-left font-semibold flex justify-between items-center focus:outline-none"
-                  aria-expanded={openFAQIndex === index}
-                  aria-controls={`faq-${index}`}
+      <section id="faq" className="scroll-mt-[130px] bg-[#D7DFA3] py-10 px-6">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+          
+          {/* Reader Reviews */}
+          <div>
+            <h2 className="text-2xl font-bold mb-4 text-[#1A4862]">Reader Reviews</h2>
+            <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
+              {[
+                `“Honestly, I didn't think a book on foreplay would feel this empowering. It's not vulgar, it's not awkward — it's just honest, well-written, and incredibly helpful. Every couple should read this at least once.” — Maggie J.`,
+                `“What really blew my mind in Dinosaurs and Prehistoric Evolution was the detailed illustration and explanation of the Chicxulub asteroid. I’ve read articles before, but this book actually helped me visualize the scale of destruction and understand how it led to the dinosaurs’ extinction. My kids kept asking questions for days. It’s educational without being overwhelming — a brilliant way to bring ancient history to life.” — Ben S.`,
+                `“I was genuinely moved by The Magnificent Giants of the Ocean, especially the part about the killer whale mother who carried her dead calf for 17 days across hundreds of miles. I’d heard the story before, but seeing it framed in the context of orca intelligence and emotional depth made it even more powerful. This book does more than educate — it builds empathy for marine life.” — Chris U.`,
+                `"I bought The Ultimate Foreplay Handbook with some skepticism, but I was pleasantly surprised. It's informative without being clinical, and it actually helped my partner and I communicate better in the bedroom. Highly recommend for couples wanting to rekindle intimacy.” — Rita`,
+                `“My teenage son is fascinated with dinosaurs, so I got him Dinosaurs and Prehistoric Evolution. It turned out to be a great resource for both of us! The illustrations were engaging, and it sparked hours of discussion. A wonderful mix of education and entertainment.” — Mark T.`,
+                `“As a marine biology enthusiast, The Magnificent Giants of the Ocean exceeded my expectations. The writing is vivid, and I could tell a lot of research went into this book. It’s perfect for anyone who wants to learn about ocean life without it feeling like a textbook.” — Marisa E.`,
+                `“Omak’s storytelling voice is what really makes his books stand out. Whether he's writing about romance or natural history, there’s a unique warmth and clarity. I subscribed to his newsletter just so I don’t miss the next release!” — Charles N.`,
+              ].map((review, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white shadow-md rounded-md p-4 hover:bg-[#D7DFD7] transition"
                 >
-                  {faq.question}
-                  <span className="ml-4 text-xl">{openFAQIndex === index ? "−" : "+"}</span>
-                </button>
-                {openFAQIndex === index && (
-                  <p id={`faq-${index}`} className="mt-3 text-gray-700">
-                    {faq.answer}
-                  </p>
-                )}
-              </div>
-            ))}
+                  <p className="text-gray-800 italic">{review}</p>
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* FAQs */}
+          <div>
+            <h2 className="text-2xl font-bold mb-4 text-[#1A4862] text-center">FAQs</h2>
+            <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
+              {faqs.map((faq, index) => (
+                <article
+                  key={index}
+                  className="bg-white shadow-md rounded-md p-4 hover:bg-[#D7DFD7] transition"
+                >
+                  <button
+                    onClick={() => toggleFAQ(index)}
+                    className="w-full text-left font-semibold flex justify-between items-center focus:outline-none text-[#1A4862]"
+                    aria-expanded={openFAQIndex === index}
+                    aria-controls={`faq-${index}`}
+                    id={`faq-button-${index}`}
+                  >
+                    {faq.question}
+                    <span className="ml-4 text-xl">{openFAQIndex === index ? "−" : "+"}</span>
+                  </button>
+
+                  {openFAQIndex === index && (
+                    <p
+                      id={`faq-${index}`}
+                      role="region"
+                      aria-labelledby={`faq-button-${index}`}
+                      className="mt-3 text-gray-700"
+                    >
+                      {faq.answer}
+                    </p>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+
         </div>
-      </div>
       </section>
+
 
 
       {/* Footer */}
@@ -360,10 +400,10 @@ export default function LandingPage() {
       {showTopBtn && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 bg-[#FF9900] text-white rounded-full p-3 shadow-lg hover:bg-[#e68a00] transition"
+          className="fixed bottom-6 right-6 z-50 bg-[#FF9900] text-white rounded-full p-3 shadow-lg hover:bg-[#e68a00] transition"
           aria-label="Scroll to top"
         >
-         ↑
+          ↑
         </button>
       )}
     </div>
