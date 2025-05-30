@@ -11,6 +11,7 @@ import Slide5 from './assets/foreplaybookcarousel5.jpeg';
 import Slide6 from './assets/foreplaybookcarousel6.jpeg';
 
 
+
 const books = [
   {
     title: "The Ultimate Foreplay Handbook",
@@ -80,6 +81,8 @@ export default function LandingPage() {
   const [feedback, setFeedback] = useState("");
   const [showTopBtn, setShowTopBtn] = useState(false);
   const [openFAQIndex, setOpenFAQIndex] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
@@ -161,17 +164,43 @@ export default function LandingPage() {
     <div className="bg-[#D7DFA3] text-[#1A4862] min-h-screen relative">
       {/* Sticky Header */}
       <header className="bg-[#1A4862] text-[#D7DFA3] sticky top-0 z-50">
-        <div className="text-center py-4">
-          <h1 className="text-4xl font-bold">Omak Charlie Omar</h1>
-          <p className="text-lg mt-1 italic">Author & Storyteller</p>
+        {/* Top bar: flex container for title and nav/hamburger */}
+        <div className="flex items-center justify-between px-4 py-4">
+          {/* Left: Site Title */}
+          <h1 className="text-2xl sm:text-4xl md:ml-20 font-bold">Omak Charlie Omar</h1>
+
+          {/* Desktop Nav (hidden on mobile) */}
+          <nav className="hidden  md:flex md:mr-20 gap-6">
+            <a href="#books" className="hover:underline">Books</a>
+            <a href="#about" className="hover:underline">About</a>
+            <a href="#faq" className="hover:underline">FAQs</a>
+            <a href="#subscribe" className="hover:underline">Subscribe</a>
+          </nav>
+
+          {/* Hamburger for Mobile (hidden on md and above) */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-[#D7DFA3] text-3xl focus:outline-none"
+            aria-label="Toggle menu"
+          >
+            ☰
+          </button>
         </div>
-        <nav className="flex justify-center gap-6 py-3">
-          <a href="#books" className="hover:underline">Books</a>
-          <a href="#about" className="hover:underline">About</a>
-          <a href="#faq" className="hover:underline">FAQ</a>
-          <a href="#subscribe" className="hover:underline">Subscribe</a>
-        </nav>
+
+        {/* Mobile Dropdown Nav */}
+        {isMenuOpen && (
+          <div className="md:hidden flex flex-col items-center gap-4 py-3 bg-[#1A4862] px-4">
+            <a href="#books" className="hover:underline" onClick={() => setIsMenuOpen(false)}>Books</a>
+            <a href="#about" className="hover:underline" onClick={() => setIsMenuOpen(false)}>About</a>
+            <a href="#faq" className="hover:underline" onClick={() => setIsMenuOpen(false)}>FAQ</a>
+            <a href="#subscribe" className="hover:underline" onClick={() => setIsMenuOpen(false)}>Subscribe</a>
+          </div>
+        )}
       </header>
+
+
+
+
       
       <section className="bg-[#D7DFA3] py-10 px-6 text-center">
         <h2 className="text-2xl md:text-3xl font-bold mb-4 text-[#1A4862]">New Here? Start With These</h2>
@@ -324,7 +353,7 @@ export default function LandingPage() {
       </section>
 
       {/* Reviews and FAQs */}
-      <section id="faq" className="scroll-mt-[130px] bg-[#D7DFA3] py-10 px-6">
+      <section id="faq" className="bg-[#D7DFA3] py-10 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
           
           {/* Reader Reviews */}
@@ -351,7 +380,7 @@ export default function LandingPage() {
           </div>
 
           {/* FAQs */}
-          <div>
+          <div className="scroll-mt-[130px] ">
             <h2 className="text-2xl font-bold mb-4 text-[#1A4862] text-center">FAQs</h2>
             <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
               {faqs.map((faq, index) => (
