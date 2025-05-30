@@ -197,10 +197,6 @@ export default function LandingPage() {
           </div>
         )}
       </header>
-
-
-
-
       
       <section className="bg-[#D7DFA3] py-10 px-6 text-center">
         <h2 className="text-2xl md:text-3xl font-bold mb-4 text-[#1A4862]">New Here? Start With These</h2>
@@ -231,7 +227,7 @@ export default function LandingPage() {
 
 
       {/* Author Section */}
-      <section id="about" className="scroll-mt-[130px] text-center py-5 px-5 bg-[#1A4862]">
+      <section id="about" className="scroll-mt-[60px] text-center py-5 px-5 bg-[#1A4862]">
         <h2 className="text-[#D7DFA3] text-3xl font-bold mb-6">About the Author</h2>
         <div className="text-[#D7DFA3] flex flex-col md:flex-row items-center justify-center gap-10">
           
@@ -269,7 +265,7 @@ export default function LandingPage() {
 
 
       {/* Books Section */}
-      <section id="books" className="scroll-mt-[130px] py-5 px-4">
+      <section id="books" className="scroll-mt-[60px] py-5 px-4">
         <h2 className="text-2xl md:text-3xl font-semibold text-center mb-5">Books</h2>
         <div className="flex flex-wrap justify-center gap-6">
           {books.map((book) => (
@@ -316,7 +312,7 @@ export default function LandingPage() {
 
 
       {/* Subscription Section */}
-      <section id="subscribe" className="scroll-mt-[130px] bg-[#1A4862] py-12 px-4 text-center mt-5">
+      <section id="subscribe" className="scroll-mt-[60px] bg-[#1A4862] py-12 px-4 text-center mt-5">
         <h2 className="text-2xl md:text-3xl font-semibold text-[#D7DFA3] mb-2">Stay Updated</h2>
         <p className="text-[#D7DFA3] mb-6 max-w-xl mx-auto">
           Subscribe to our newsletter to receive updates on new book releases, events, and exclusive content from Omak Charlie Omar.
@@ -380,7 +376,7 @@ export default function LandingPage() {
           </div>
 
           {/* FAQs */}
-          <div className="scroll-mt-[130px] ">
+          <div className="scroll-mt-[60px]">
             <h2 className="text-2xl font-bold mb-4 text-[#1A4862] text-center">FAQs</h2>
             <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
               {faqs.map((faq, index) => (
